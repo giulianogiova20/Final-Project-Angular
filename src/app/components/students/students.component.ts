@@ -24,7 +24,8 @@ export class StudentsComponent {
 
   // Add Student
   addStudent() {
-    const dialog = this.dialogService.open(AbmStudentComponent, { width: '22' });
+    let title="Add Student"
+    const dialog = this.dialogService.open(AbmStudentComponent, { width: '25%' });
     dialog.afterClosed().subscribe((value) => {
       if (value) {
         const lastId: number = this.students[this.students.length -1]?.id;
@@ -35,6 +36,7 @@ export class StudentsComponent {
 
   // Modify Student
   editStudent(student: Student) {
+    let title="Edit Student"
     const dialog = this.dialogService.open(AbmStudentComponent, { data: student, width: '25%' });
     dialog.afterClosed().subscribe((data) => {
       if (data) {
