@@ -3,12 +3,14 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MaterialModule } from './material.module';
+import { MaterialModule } from './modules/material.module';
 import { MainComponent } from './components/main/main.component';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { StudentsComponent } from './components/students/students.component';
 import { AbmStudentComponent } from './components/abm-student/abm-student.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { TextSizeDirective } from './directives/text-size.directive';
+import { NameFormatPipe } from './pipes/name-format.pipe';
 
 @NgModule({
   declarations: [
@@ -17,6 +19,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     ToolbarComponent,
     StudentsComponent,
     AbmStudentComponent,
+    TextSizeDirective,
+    NameFormatPipe,
   ],
   imports: [
     BrowserModule,

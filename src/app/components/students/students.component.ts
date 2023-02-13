@@ -18,7 +18,7 @@ export class StudentsComponent {
   ]
 
   // Table columns
-  displayedColumns = ['id', 'firstName', 'lastName', 'email', 'isActive', 'edit', 'delete'];
+  displayedColumns = ['id', 'firstName', 'email', 'isActive', 'edit', 'delete'];
 
   constructor(private readonly dialogService: MatDialog) {}
 
