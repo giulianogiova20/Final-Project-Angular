@@ -11,6 +11,7 @@ import { AbmStudentComponent } from './components/abm-student/abm-student.compon
 import { ReactiveFormsModule } from '@angular/forms';
 import { TextSizeDirective } from './directives/text-size.directive';
 import { NameFormatPipe } from './pipes/name-format.pipe';
+import { ActiveStudentsComponent } from './components/active-students/active-students.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { NameFormatPipe } from './pipes/name-format.pipe';
     AbmStudentComponent,
     TextSizeDirective,
     NameFormatPipe,
+    ActiveStudentsComponent,
   ],
   imports: [
     BrowserModule,
