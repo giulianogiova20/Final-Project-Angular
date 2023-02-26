@@ -1,0 +1,20 @@
+<mat-sidenav-container class="sidenav-container">
+    <mat-sidenav-content>
+      <app-toolbar (toggleSidebar)="opened = !opened" class="positions"></app-toolbar>
+      <div class="main-content">
+        <div class="router-outlet-container">
+            <router-outlet></router-outlet>
+        </div>
+      </div>
+    </mat-sidenav-content>
+
+    <mat-sidenav [(opened)]="opened" mode="over">
+        <mat-list>
+            <mat-list-item><button mat-button (click)="redirectHome()">Home</button></mat-list-item>
+            <mat-list-item><button mat-button routerLink="courses/list">Courses</button></mat-list-item>
+        </mat-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <ng-content></ng-content>
+    </mat-sidenav-content>
+</mat-sidenav-container>

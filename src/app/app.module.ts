@@ -3,32 +3,30 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MaterialModule } from './modules/material.module';
-import { MainComponent } from './components/main/main.component';
-import { ToolbarComponent } from './components/toolbar/toolbar.component';
-import { StudentsComponent } from './components/students/students.component';
-import { AbmStudentComponent } from './components/abm-student/abm-student.component';
-import { ReactiveFormsModule } from '@angular/forms';
-import { TextSizeDirective } from './directives/text-size.directive';
-import { NameFormatPipe } from './pipes/name-format.pipe';
-import { ActiveStudentsComponent } from './components/active-students/active-students.component';
+import { MaterialModule } from './shared/modules/material.module';
+import { AppRoutingModule } from './app-routing.module'
+
+import { MainComponent } from './core/components/main/main.component';
+import { NotFoundComponent } from './core/components/not-found/not-found.component';
+import { CoursesModule } from './pages/courses/courses.module';
+import { ToolbarComponent } from './core/components/toolbar/toolbar.component';
+import { SidenavComponent } from './core/components/sidenav/sidenav.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     MainComponent,
+    NotFoundComponent,
     ToolbarComponent,
-    StudentsComponent,
-    AbmStudentComponent,
-    TextSizeDirective,
-    NameFormatPipe,
-    ActiveStudentsComponent,
+    SidenavComponent,
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     MaterialModule,
-    ReactiveFormsModule
+    AppRoutingModule,
+    CoursesModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,0 +1,42 @@
+<div mat-dialog-content>
+    <form class="flex flex-column" [formGroup]="courseForm">
+        <div>
+            <mat-form-field appearance="fill">
+                <mat-label>Name</mat-label>
+                <input [formControl]="nameControl" matInput placeholder="John">
+                <mat-error *ngIf="courseForm.get('name')?.errors?.['required']">Name is required</mat-error>
+                <mat-error *ngIf="courseForm.get('name')?.errors?.['minlength']">Name must me at least 2 characters</mat-error>
+            </mat-form-field>
+        </div>
+        <div >
+            <mat-form-field appearance="fill">
+                <mat-label>ID</mat-label>
+                <input [formControl]="idControl" matInput placeholder="Doe">
+                <mat-error *ngIf="courseForm.get('id')?.errors?.['required']">ID is required</mat-error>
+                <mat-error *ngIf="courseForm.get('id')?.errors?.['minlength']">ID Must be at least 2 characters</mat-error>
+            </mat-form-field>
+        </div>
+        <div>
+            <mat-form-field appearance="fill">
+                <mat-label>Start Date</mat-label>
+                <input matInput [matDatepicker]="startDateControl" formControlName="startDateControl">
+                <mat-datepicker-toggle matSuffix [for]="startDateControl"></mat-datepicker-toggle>
+                <mat-datepicker #startDateControl></mat-datepicker>
+            </mat-form-field>
+        </div>
+        <div>
+            <mat-form-field appearance="fill">
+                <mat-label>End Date</mat-label>
+                <input matInput [matDatepicker]="endDateControl" formControlName="endDateControl">
+                <mat-datepicker-toggle matSuffix [for]="endDateControl"></mat-datepicker-toggle>
+                <mat-datepicker #endDateControl></mat-datepicker>
+            </mat-form-field>
+        </div>
+        <mat-slide-toggle color="primary" [formControl]="isRegistrationOpen">Is Registration Open</mat-slide-toggle>
+    </form>
+</div>
+<div mat-dialog-actions class="ps-5">
+    <button mat-flat-button color="primary" (click)="close()">Cancel</button>
+    <button mat-flat-button color="primary" [mat-dialog-close]="courseForm.value"
+        [disabled]="courseForm.invalid">Save</button>
+</div>
