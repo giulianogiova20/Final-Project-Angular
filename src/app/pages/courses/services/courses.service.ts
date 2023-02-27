@@ -77,14 +77,13 @@ export class CoursesService {
   editCourse(course: Course): void{
     let index = this.courses.findIndex((c: Course) => c.id === course.id);
     if(index > -1){
-      this.courses[index] = course;
+      this.courses[index] = course
       this.courses$.next(this.courses);
     }
   }
 
   removeCourse(course: Course): void{
     let index = this.courses.findIndex((c: Course) => c.id === course.id);
-
     if(index > -1){
       this.courses.splice(index, 1);
       this.courses$.next(this.courses);

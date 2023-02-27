@@ -53,8 +53,22 @@ export class CoursesListComponent implements OnInit{
     const dialog = this.dialogService.open(CoursesFormComponent, { data: course});
     dialog.afterClosed().subscribe((data) => {
       if (data) {
-        console.log(data)
-        this.coursesService.editCourse(data)
+        console.log("DATA",data)
+        let course: Course = {
+        id: data.id,
+        name: data.name,
+        teacher: {
+          firstName: "Nuevo",
+          lastName: "Profe",
+          email: "profe@mail.com",
+          registerDate: new Date()
+        },
+        isRegistrationOpen: data.isRegistrationOpen,
+        startDate: data.startDateControl,
+        endDate: data.endDateControl
+      }
+      console.log("COURSE",course)
+        this.coursesService.editCourse(course)
       }
     })
   }
