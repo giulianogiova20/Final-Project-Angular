@@ -3,17 +3,26 @@
         <div>
             <mat-form-field appearance="fill">
                 <mat-label>Name</mat-label>
-                <input [formControl]="nameControl" matInput placeholder="John">
+                <input [formControl]="nameControl" matInput placeholder="Course name">
                 <mat-error *ngIf="courseForm.get('name')?.errors?.['required']">Name is required</mat-error>
                 <mat-error *ngIf="courseForm.get('name')?.errors?.['minlength']">Name must me at least 2 characters</mat-error>
             </mat-form-field>
         </div>
         <div >
             <mat-form-field appearance="fill">
-                <mat-label>ID</mat-label>
-                <input [formControl]="idControl" matInput placeholder="Doe">
-                <mat-error *ngIf="courseForm.get('id')?.errors?.['required']">ID is required</mat-error>
-                <mat-error *ngIf="courseForm.get('id')?.errors?.['minlength']">ID Must be at least 2 characters</mat-error>
+                <mat-label>Board</mat-label>
+                <input [formControl]="boardControl" matInput placeholder="Board">
+                <mat-error *ngIf="courseForm.get('board')?.errors?.['required']">Board is required</mat-error>
+                <mat-error *ngIf="courseForm.get('board')?.errors?.['minlength']">Board Must be at least 2 characters</mat-error>
+            </mat-form-field>
+        </div>
+        <div>
+            <mat-form-field appearance="fill">
+                <mat-label>Teacher</mat-label>
+                <mat-select formControlName="teacher">
+                    <mat-option *ngFor="let teacher of teachers$ | async" [value]="teacher">{{ teacher | nameFormat }}</mat-option>
+                </mat-select>
+                <mat-error *ngIf="courseForm.get('teacher')?.errors?.['required']">Teacher is required</mat-error>
             </mat-form-field>
         </div>
         <div>
@@ -32,7 +41,7 @@
                 <mat-datepicker #endDateControl></mat-datepicker>
             </mat-form-field>
         </div>
-        <mat-slide-toggle color="primary" [formControl]="isRegistrationOpen">Is Registration Open</mat-slide-toggle>
+        <mat-slide-toggle color="primary" formControlName="isRegistrationOpen">Is Registration Open</mat-slide-toggle>
     </form>
 </div>
 <div mat-dialog-actions class="ps-5">

@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { CoursesListComponent } from './courses-list/courses-list.component';
 
 const routes: Routes = [
-  { path: 'courses', children: [
+  { path: '', children: [
     { path: 'list', component: CoursesListComponent },
   ]}
 ];

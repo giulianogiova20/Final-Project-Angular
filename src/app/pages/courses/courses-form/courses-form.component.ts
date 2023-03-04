@@ -3,8 +3,9 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { DialogRef } from '@angular/cdk/dialog';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Course } from 'src/app/models/course';
-import { Router } from '@angular/router';
-import { CoursesService } from '../services/courses.service';
+import { TeacherService } from 'src/app/core/services/teacher.service';
+import { Observable } from 'rxjs';
+import { Teacher } from 'src/app/models/teacher';
 
 @Component({
   selector: 'app-courses-form',
@@ -13,7 +14,12 @@ import { CoursesService } from '../services/courses.service';
 })
 export class CoursesFormComponent{
 
-  idControl = new FormControl('', [
+  teachers$: Observable<Teacher[]> = this.teachers.getTeachers()
+
+  teacherControl = new FormControl({}, [
+    Validators.required])
+
+  boardControl = new FormControl('', [
     Validators.required,
     Validators.minLength(2),
   ])
@@ -28,14 +34,16 @@ export class CoursesFormComponent{
     Validators.required])
 
   courseForm = new FormGroup({
-    id: this.idControl,
     name: this.nameControl,
+    board: this.boardControl,
+    teacher: this.teacherControl,
     isregistrationOpen: this.isRegistrationOpen,
     startDateControl: this.startDateControl,
     endDateControl: this.endDateControl,
   })
 
   constructor(
+    private teachers: TeacherService,
     private readonly dialogRef: DialogRef,
     @Inject(MAT_DIALOG_DATA) public data: Course | null
   ){

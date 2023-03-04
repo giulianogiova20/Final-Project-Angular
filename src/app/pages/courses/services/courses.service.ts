@@ -1,92 +1,64 @@
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, catchError, Observable, throwError } from 'rxjs';
 import { Course } from 'src/app/models/course';
+import { env } from 'src/environments/envitonment';
 
 @Injectable()
 export class CoursesService {
 
-  private courses : Course[] = [
-    {
-      id: '49533',
-      name: 'Angular',  
-      teacher: {
-        firstName: 'Giuliano',
-        lastName: 'Giovanelli',
-        email: 'gg@mail.com',
-        registerDate: new Date(2022, 2, 15)
-      },
-      isRegistrationOpen: true,
-      startDate: new Date(2023, 0, 1, 20, 30, 0),
-      endDate: new Date(2023, 0, 31, 20, 30, 0)
-    },
-    {
-      id: '49654',
-      name: 'Data Science',  
-      teacher: {
-        firstName: 'Cesar',
-        lastName: 'Bergamasco',
-        email: 'cb@mail.com',
-        registerDate: new Date(2022, 2, 15)
-      },
-      isRegistrationOpen: true,
-      startDate: new Date(2023, 2, 1, 20, 30, 0),
-      endDate: new Date(2023, 2, 31, 20, 30, 0)
-    },
-    {
-      id: '49643',
-      name: 'Backend',  
-      teacher: {
-        firstName: 'Matias',
-        lastName: 'Karraz',
-        email: 'mk@mail.com',
-        registerDate: new Date(2022, 2, 15)
-      },
-      isRegistrationOpen: true,
-      startDate: new Date(2023, 1, 1, 20, 30, 0),
-      endDate: new Date(2023, 1, 31, 20, 30, 0)
-    },
-    {
-      id: '49544',
-      name: 'React',  
-      teacher: {
-        firstName: 'Joaquin',
-        lastName: 'Castro',
-        email: 'jc@mail.com',
-        registerDate: new Date(2022, 2, 15)
-      },
-      isRegistrationOpen: true,
-      startDate: new Date(2023, 3, 1, 20, 30, 0),
-      endDate: new Date(2023, 3, 31, 20, 30, 0)
-    }
-  ]
-  private courses$!: BehaviorSubject<Course[]>
-
-  constructor() {
-    this.courses$ = new BehaviorSubject<Course[]>(this.courses)
-   }
+  constructor(
+    private httpCourses: HttpClient
+  ) {}
 
   getCourses(): Observable<Course[]>{
-    return this.courses$.asObservable()
+    return this.httpCourses.get<Course[]>(`${env.apiURL}/courses`, {
+      headers: new HttpHeaders({
+        'content-type': 'application/json',
+        'encoding': 'UTF-8'
+      })
+    }).pipe(
+      catchError(this.captureError)
+    )
   }
 
-  addCourse(course: Course): void{
-    this.courses.push(course);
-    this.courses$.next(this.courses);
+  addCourse(course: Course): Observable<Course>{
+    return this.httpCourses.post<Course>(`${env.apiURL}/courses`, course, {
+      headers: new HttpHeaders({
+        'encoding': 'UTF-8'
+      })
+    }).pipe(
+      catchError(this.captureError)
+    );
   }
 
-  editCourse(course: Course): void{
-    let index = this.courses.findIndex((c: Course) => c.id === course.id);
-    if(index > -1){
-      this.courses[index] = course
-      this.courses$.next(this.courses);
+  editCourse(course: Course): Observable<Course>{
+    return this.httpCourses.put<Course>(`${env.apiURL}/courses/${course.id}`, course, {
+      headers: new HttpHeaders({
+        'user': 'Profe'
+      })
+    }).pipe(
+      catchError(this.captureError)
+    );
+  }
+
+  removeCourse(course: Course): Observable<Course>{
+    return this.httpCourses.delete<Course>(`${env.apiURL}/courses/${course.id}`, {
+      headers: new HttpHeaders({
+        'user': 'Profe'
+      })
+    }).pipe(
+      catchError(this.captureError)
+    );
+  }
+
+  private captureError(error: HttpErrorResponse){
+    if(error.error instanceof ErrorEvent){
+      alert(`Error on client side: ${error.message}`);
+    }else{
+      alert(`Server error: ${error.message}`);
     }
-  }
 
-  removeCourse(course: Course): void{
-    let index = this.courses.findIndex((c: Course) => c.id === course.id);
-    if(index > -1){
-      this.courses.splice(index, 1);
-      this.courses$.next(this.courses);
-    }
+    return throwError(() => new Error('Error processing courses service'));
   }
 }

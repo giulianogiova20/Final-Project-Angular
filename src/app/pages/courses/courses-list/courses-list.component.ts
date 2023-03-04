@@ -4,6 +4,8 @@ import { Observable } from 'rxjs';
 import { Course } from 'src/app/models/course';
 import { MatDialog } from '@angular/material/dialog';
 import { CoursesFormComponent } from '../courses-form/courses-form.component';
+import { Session } from 'src/app/models/session';
+import { SessionService } from 'src/app/core/services/session.service';
 
 @Component({
   selector: 'app-courses-list',
@@ -13,14 +15,17 @@ import { CoursesFormComponent } from '../courses-form/courses-form.component';
 export class CoursesListComponent implements OnInit{
   courses!: Course[];
   courses$!: Observable<Course[]>;
+  session$!: Observable<Session>
 
   constructor(
     private coursesService: CoursesService,
     private readonly dialogService: MatDialog,
+    private session: SessionService
   ){}
 
   ngOnInit() {
     this.courses$ = this.coursesService.getCourses();
+    this.session$ = this.session.getSession()
   }
 
   addCourse(){
@@ -28,25 +33,27 @@ export class CoursesListComponent implements OnInit{
     dialog.afterClosed().subscribe((data) => {
       if (data) {
         let course: Course = {
-          id: data.id,
+          id: '',
           name: data.name,
-          teacher: {
-            firstName: "Nuevo",
-            lastName: "Profe",
-            email: "profe@mail.com",
-            registerDate: new Date()
-          },
+          board: data.board,
+          teacher: data.teacher,
           isRegistrationOpen: data.isRegistrationOpen,
           startDate: data.startDateControl,
           endDate: data.endDateControl,
         }
-        this.coursesService.addCourse(course)
+        this.coursesService.addCourse(course).subscribe((course: Course) => {
+          alert(`${course.name} added`)
+          this.courses$ = this.coursesService.getCourses()
+        });
       }
     })
   }
 
   removeCourse(course: Course){
-    this.coursesService.removeCourse(course);
+    this.coursesService.removeCourse(course).subscribe((course: Course) => {
+      alert(`${course.name} deleted`)
+      this.courses$ = this.coursesService.getCourses()
+    });
   }
 
   editCourse(course: Course){
@@ -57,18 +64,15 @@ export class CoursesListComponent implements OnInit{
         let course: Course = {
         id: data.id,
         name: data.name,
-        teacher: {
-          firstName: "Nuevo",
-          lastName: "Profe",
-          email: "profe@mail.com",
-          registerDate: new Date()
-        },
+        board: data.board,
+        teacher: data.teacher,
         isRegistrationOpen: data.isRegistrationOpen,
         startDate: data.startDateControl,
         endDate: data.endDateControl
       }
       console.log("COURSE",course)
         this.coursesService.editCourse(course)
+        this.courses$ = this.coursesService.getCourses()
       }
     })
   }
