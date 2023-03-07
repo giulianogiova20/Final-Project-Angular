@@ -7,6 +7,7 @@ import { MaterialModule } from './shared/modules/material.module';
 import { AppRoutingModule } from './app-routing.module'
 
 import { CoreModule } from './core/core.module';
+import { CommonModule } from '@angular/common';
 
 
 

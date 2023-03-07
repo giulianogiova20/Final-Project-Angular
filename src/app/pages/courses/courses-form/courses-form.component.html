@@ -1,9 +1,12 @@
 <div mat-dialog-content>
     <form class="flex flex-column" [formGroup]="courseForm">
         <div>
+            <mat-form-field appearance="fill" class="d-none">
+                <input formControlName="id" matInput placeholder="ID">
+            </mat-form-field>
             <mat-form-field appearance="fill">
                 <mat-label>Name</mat-label>
-                <input [formControl]="nameControl" matInput placeholder="Course name">
+                <input formControlName="name" matInput placeholder="Course name">
                 <mat-error *ngIf="courseForm.get('name')?.errors?.['required']">Name is required</mat-error>
                 <mat-error *ngIf="courseForm.get('name')?.errors?.['minlength']">Name must me at least 2 characters</mat-error>
             </mat-form-field>
@@ -11,7 +14,7 @@
         <div >
             <mat-form-field appearance="fill">
                 <mat-label>Board</mat-label>
-                <input [formControl]="boardControl" matInput placeholder="Board">
+                <input formControlName="board" matInput placeholder="Board">
                 <mat-error *ngIf="courseForm.get('board')?.errors?.['required']">Board is required</mat-error>
                 <mat-error *ngIf="courseForm.get('board')?.errors?.['minlength']">Board Must be at least 2 characters</mat-error>
             </mat-form-field>
@@ -28,17 +31,17 @@
         <div>
             <mat-form-field appearance="fill">
                 <mat-label>Start Date</mat-label>
-                <input matInput [matDatepicker]="startDateControl" formControlName="startDateControl">
-                <mat-datepicker-toggle matSuffix [for]="startDateControl"></mat-datepicker-toggle>
-                <mat-datepicker #startDateControl></mat-datepicker>
+                <input matInput [matDatepicker]="startDate" formControlName="startDate">
+                <mat-datepicker-toggle matSuffix [for]="startDate"></mat-datepicker-toggle>
+                <mat-datepicker #startDate></mat-datepicker>
             </mat-form-field>
         </div>
         <div>
             <mat-form-field appearance="fill">
                 <mat-label>End Date</mat-label>
-                <input matInput [matDatepicker]="endDateControl" formControlName="endDateControl">
-                <mat-datepicker-toggle matSuffix [for]="endDateControl"></mat-datepicker-toggle>
-                <mat-datepicker #endDateControl></mat-datepicker>
+                <input matInput [matDatepicker]="endDate" formControlName="endDate">
+                <mat-datepicker-toggle matSuffix [for]="endDate"></mat-datepicker-toggle>
+                <mat-datepicker #endDate></mat-datepicker>
             </mat-form-field>
         </div>
         <mat-slide-toggle color="primary" formControlName="isRegistrationOpen">Is Registration Open</mat-slide-toggle>

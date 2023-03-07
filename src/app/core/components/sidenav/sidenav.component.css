@@ -4,16 +4,16 @@
 }
 
 .mat-sidenav{
-  width: 180px;
+  width: 15%;
 }
 
 .example-spacer {
     flex: 1 1 auto;
   }
 
-  button{
-    margin-left: 15px;
-  }
+button{
+  margin-left: 15px;
+}
 
 
 .main-content {
@@ -24,7 +24,7 @@
   justify-content: space-between;
 }
 .router-outlet-container {
-  padding: 40px;
+  padding: 100px;
   display: flex;
   flex-direction: column;
 }

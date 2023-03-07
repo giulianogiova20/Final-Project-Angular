@@ -38,8 +38,8 @@ export class CoursesListComponent implements OnInit{
           board: data.board,
           teacher: data.teacher,
           isRegistrationOpen: data.isRegistrationOpen,
-          startDate: data.startDateControl,
-          endDate: data.endDateControl,
+          startDate: data.startDate,
+          endDate: data.endDate,
         }
         this.coursesService.addCourse(course).subscribe((course: Course) => {
           alert(`${course.name} added`)
@@ -57,22 +57,13 @@ export class CoursesListComponent implements OnInit{
   }
 
   editCourse(course: Course){
-    const dialog = this.dialogService.open(CoursesFormComponent, { data: course});
+    const dialog = this.dialogService.open(CoursesFormComponent, {data: course});
     dialog.afterClosed().subscribe((data) => {
       if (data) {
-        console.log("DATA",data)
-        let course: Course = {
-        id: data.id,
-        name: data.name,
-        board: data.board,
-        teacher: data.teacher,
-        isRegistrationOpen: data.isRegistrationOpen,
-        startDate: data.startDateControl,
-        endDate: data.endDateControl
-      }
-      console.log("COURSE",course)
-        this.coursesService.editCourse(course)
-        this.courses$ = this.coursesService.getCourses()
+        this.coursesService.editCourse(data).subscribe((data: Course) => {
+          alert(`${data.name} Edited`)
+          this.courses$ = this.coursesService.getCourses()
+        })
       }
     })
   }

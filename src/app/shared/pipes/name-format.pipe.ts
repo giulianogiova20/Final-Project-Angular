@@ -7,8 +7,8 @@ import { Teacher } from 'src/app/models/teacher';
 })
 export class NameFormatPipe implements PipeTransform {
 
-  transform(person: Student | Teacher): string {
+  transform(person: Student | Teacher, ...args: any[]): string {
     let fullname: string
-    return fullname = `${person.firstName} ${person.lastName}`
+    return person.firstName!==undefined? fullname = `${person.firstName} ${person.lastName}` : args[0]
   }
 }

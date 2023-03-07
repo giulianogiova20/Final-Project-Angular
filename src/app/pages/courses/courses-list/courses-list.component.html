@@ -14,7 +14,7 @@
                 </mat-card-header>
                 <img class="card-imagen" mat-card-image src="https://parentesis.com/imagesPosts/coder00.jpg" alt="">
                 <mat-card-content>
-                    <p>Taught by {{ course.teacher | nameFormat }}</p>
+                    <p>Taught by: {{ course.teacher | nameFormat: "No teacher yet" }}</p>
                     <p>Open: {{ course.isRegistrationOpen | booleanToText: "Yes": "No" }}</p>
                     <p>Starts: {{ course.startDate | date:'dd/MM/YYYY HH:mm'}}</p>
                     <p>Ends: {{ course.endDate | date:'dd/MM/YYYY HH:mm'}}</p>

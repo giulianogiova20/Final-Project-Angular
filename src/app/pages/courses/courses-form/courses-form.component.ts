@@ -12,34 +12,38 @@ import { Teacher } from 'src/app/models/teacher';
   templateUrl: './courses-form.component.html',
   styleUrls: ['./courses-form.component.css']
 })
+
 export class CoursesFormComponent{
 
   teachers$: Observable<Teacher[]> = this.teachers.getTeachers()
 
-  teacherControl = new FormControl({}, [
+  id = new FormControl('')
+
+  teacher = new FormControl({}, [
     Validators.required])
 
-  boardControl = new FormControl('', [
+  board = new FormControl('', [
     Validators.required,
     Validators.minLength(2),
   ])
-  nameControl = new FormControl('', [
+  name = new FormControl('', [
     Validators.required,
     Validators.minLength(2),
   ])
   isRegistrationOpen = new FormControl(true)
-  startDateControl = new FormControl('', [
+  startDate = new FormControl(new Date(''), [
     Validators.required])
-  endDateControl = new FormControl('', [
+  endDate = new FormControl(new Date(''), [
     Validators.required])
 
   courseForm = new FormGroup({
-    name: this.nameControl,
-    board: this.boardControl,
-    teacher: this.teacherControl,
-    isregistrationOpen: this.isRegistrationOpen,
-    startDateControl: this.startDateControl,
-    endDateControl: this.endDateControl,
+    id: this.id,
+    name: this.name,
+    board: this.board,
+    teacher: this.teacher,
+    isRegistrationOpen: this.isRegistrationOpen,
+    startDate: this.startDate,
+    endDate: this.endDate,
   })
 
   constructor(

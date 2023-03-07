@@ -8,6 +8,7 @@ import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { MaterialModule } from '../shared/modules/material.module';
 import { AuthModule } from '../auth/auth.module';
 import { AuthRoutingModule } from '../auth/auth-routing.module';
+import { BrowserModule } from '@angular/platform-browser';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { AuthRoutingModule } from '../auth/auth-routing.module';
     ToolbarComponent
   ],
   imports: [
+    BrowserModule,
     HttpClientModule,
     MaterialModule,
     AuthModule,
