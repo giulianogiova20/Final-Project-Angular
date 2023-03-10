@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, Optional } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { DialogRef } from '@angular/cdk/dialog';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -48,7 +48,7 @@ export class CoursesFormComponent{
 
   constructor(
     private teachers: TeacherService,
-    private readonly dialogRef: DialogRef,
+    @Optional() private readonly dialogRef: DialogRef,
     @Inject(MAT_DIALOG_DATA) public data: Course | null
   ){
     if(data) {

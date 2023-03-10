@@ -19,7 +19,7 @@
                     <p>Starts: {{ course.startDate | date:'dd/MM/YYYY HH:mm'}}</p>
                     <p>Ends: {{ course.endDate | date:'dd/MM/YYYY HH:mm'}}</p>
                 </mat-card-content>
-                <mat-card-actions *ngIf="session$ | async as session">
+                <mat-card-actions *ngIf="session$ | async as session" align="end">
                     <button *ngIf="session.userActive?.isAdmin" mat-raised-button color="primary" (click)="editCourse(course)">
                         Edit
                     </button>

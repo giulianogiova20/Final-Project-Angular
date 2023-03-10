@@ -1,4 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MaterialModule } from 'src/app/shared/modules/material.module';
+import { RouterTestingModule } from '@angular/router/testing';
 
 import { AuthHomeComponent } from './auth-home.component';
 
@@ -8,7 +11,11 @@ describe('AuthHomeComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AuthHomeComponent ]
+      declarations: [ AuthHomeComponent ],
+      imports: [
+        MaterialModule,
+        RouterTestingModule
+      ]
     })
     .compileComponents();
 

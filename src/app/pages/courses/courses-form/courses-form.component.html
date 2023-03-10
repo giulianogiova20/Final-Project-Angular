@@ -49,6 +49,6 @@
 </div>
 <div mat-dialog-actions class="ps-5">
     <button mat-flat-button color="primary" (click)="close()">Cancel</button>
-    <button mat-flat-button color="primary" [mat-dialog-close]="courseForm.value"
+    <button id="btnSave" mat-flat-button color="primary" [mat-dialog-close]="courseForm.value"
         [disabled]="courseForm.invalid">Save</button>
 </div>

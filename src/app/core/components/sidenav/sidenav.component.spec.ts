@@ -1,4 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MaterialModule } from 'src/app/shared/modules/material.module';
+import { ToolbarComponent } from '../toolbar/toolbar.component';
 
 import { SidenavComponent } from './sidenav.component';
 
@@ -8,7 +13,16 @@ describe('SidenavComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SidenavComponent ]
+      declarations: [ 
+        SidenavComponent, 
+        ToolbarComponent 
+      ],
+      imports: [ 
+        MaterialModule, 
+        BrowserAnimationsModule,
+        BrowserModule,
+        RouterTestingModule
+      ]
     })
     .compileComponents();
 
