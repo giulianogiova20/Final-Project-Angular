@@ -13,7 +13,6 @@ import { SessionService } from 'src/app/core/services/session.service';
   styleUrls: ['./courses-list.component.css']
 })
 export class CoursesListComponent implements OnInit{
-  courses!: Course[];
   courses$!: Observable<Course[]>;
   session$!: Observable<Session>
 
